@@ -1,18 +1,17 @@
 // ENTITY -> REGRAS DE NEGÓCIO (Complexidade de negócio);
 // ENTITY / MODEL -> Atender a infraestrutura (ORM) (Complexidade acidental);
 
+import Address from "./address";
+
 class Customer {
     _id: string;
     _name: string;
-    _address: string;
+    _address!: Address;
     _active: boolean = false;
 
-    constructor(id: string, name: string, address: string = "") {
+    constructor(id: string, name: string) {
         this._id = id;
         this._name = name;
-        this._address = address;
-
-        if(address.length !== 0) this.activate();
 
         this.validate();
     }
@@ -28,11 +27,15 @@ class Customer {
     }
 
     activate(): void {
-        if(this._address.length === 0) throw new Error("Address is mandatory to activate a customer");
+        if(!this._address) throw new Error("Address is mandatory to activate a customer");
         this._active = true;
     }
 
     deactivate(): void {
         this._active = false;
+    }
+
+    set Address(address: Address) {
+        this.Address = address;
     }
 }
