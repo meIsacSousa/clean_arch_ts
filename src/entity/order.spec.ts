@@ -30,6 +30,5 @@ describe("Order unit tests", () => {
 
         // assert
         expect(order.total()).toBe(25);
-
     });
 });
