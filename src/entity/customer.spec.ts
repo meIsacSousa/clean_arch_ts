@@ -68,4 +68,11 @@ describe("Customer unit tests", () => {
         }).toThrowError("Address is mandatory to activate a customer");
     });
 
+    it("Should add reward points", () => {
+        const customer = new Customer("1", "Isac");
+        expect(customer.rewardPoints).toBe(0);
+        
+        customer.addRewardPoints(10);
+        expect(customer.rewardPoints).toBe(10);
+    });
 });
