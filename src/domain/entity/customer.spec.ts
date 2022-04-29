@@ -31,7 +31,7 @@ describe("Customer unit tests", () => {
         // Arrange
         const customer = new Customer("1", "Isac");
         const address = new Address("Rua Vamos que vamos", 7, "12345-678", "Mossoró");
-        customer.Address = address;
+        customer.address = address;
 
         //act
         customer.activate();
@@ -46,7 +46,7 @@ describe("Customer unit tests", () => {
         // Arrange
         const customer = new Customer("1", "Isac");
         const address = new Address("Rua Vamos que vamos", 7, "12345-678", "Mossoró");
-        customer.Address = address;
+        customer.address = address;
 
         //act
         customer.activate();
