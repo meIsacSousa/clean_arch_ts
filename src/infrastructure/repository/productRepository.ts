@@ -1,17 +1,33 @@
-import product from "../../domain/entity/product";
+import Product from "../../domain/entity/product";
 import IProductRepository from "../../domain/repository/IProductRepository";
+import ProductModel from "../db/sequelize/model/product.model";
 
-export default class productRepository implements IProductRepository {
-    create(entity: product): Promise<void> {
-        throw new Error("Method not implemented.");
+export default class ProductRepository implements IProductRepository {
+    async create(entity: Product): Promise<void> {
+        await ProductModel.create({
+            id: entity.id,
+            name: entity.name,
+            price: entity.price,
+        });
     }
-    update(entity: product): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async update(entity: Product): Promise<void> {
+        await ProductModel.update({
+            name: entity.name,
+            price: entity.price,
+        }, { where: { id: entity.id } });
     }
-    find(id: string): Promise<product> {
-        throw new Error("Method not implemented.");
+
+    async find(id: string): Promise<Product> {
+        const productModel = await ProductModel.findOne({ where: { id } });
+
+        if (productModel) return new Product(productModel.id, productModel.name, productModel.price);
+
+        return null as any;
     }
-    findAll(): Promise<product[]> {
-        throw new Error("Method not implemented.");
+
+    async findAll(): Promise<Product[]> {
+        const productModels = await ProductModel.findAll();
+        return productModels.map(p => new Product(p.id, p.name, p.price));
     }
 }
