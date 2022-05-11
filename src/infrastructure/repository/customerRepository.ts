@@ -1,3 +1,4 @@
+import Address from "../../domain/entity/address";
 import Customer from "../../domain/entity/customer";
 import ICustomerRepository from "../../domain/repository/ICustomerRepository";
 import CustomerModel from "../db/sequelize/model/customer.model";
@@ -33,10 +34,13 @@ export default class CustomerRepository implements ICustomerRepository {
 
         if (customerModel) {
             const customer = new Customer(customerModel.id, customerModel.name);
-            customer.changeAdress(customerModel.street,
-                customerModel.number,
-                customerModel.zipcode,
-                customerModel.city);
+            customer.changeAdress({
+                street: customerModel.street,
+                number: customerModel.number,
+                zip: customerModel.zipcode,
+                city: customerModel.city
+            } as Address
+            );
 
             customer.addRewardPoints(customerModel.rewardPoints);
             if (customerModel.active) customer.activate();
@@ -52,10 +56,12 @@ export default class CustomerRepository implements ICustomerRepository {
         const customerModels = await CustomerModel.findAll();
         return customerModels.map(c => {
             const customer = new Customer(c.id, c.name);
-            customer.changeAdress(c.street,
-                c.number,
-                c.zipcode,
-                c.city);
+            customer.changeAdress({
+                street: c.street,
+                number: c.number,
+                zip: c.zipcode,
+                city: c.city
+            } as Address);
 
             customer.addRewardPoints(c.rewardPoints);
             if (c.active) customer.activate();

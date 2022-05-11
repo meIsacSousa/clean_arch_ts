@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+import Address from "../../domain/entity/address";
 import Customer from "../../domain/entity/customer";
 import CustomerModel from "../db/sequelize/model/customer.model";
 import CustomerRepository from "./customerRepository";
@@ -27,10 +28,12 @@ describe("Customer Repository unit tests", () => {
 
     it("Should create a customer", async () => {
         const customer = new Customer("1", "Isac");
-        customer.changeAdress("street",
-            2,
-            "99999-999",
-            "cidade");
+        customer.changeAdress({
+            street: "street",
+            number: 2,
+            zip: "99999-999",
+            city: "cidade"
+        } as Address);
 
         customer.addRewardPoints(10);
         customer.activate();
@@ -52,7 +55,12 @@ describe("Customer Repository unit tests", () => {
 
     it("Should update a costumer", async () => {
         const customer = new Customer("1", "Isac");
-        customer.changeAdress("street", 2, "99999-999", "cidade");
+        customer.changeAdress({
+            street: "street",
+            number: 2,
+            zip: "99999-999",
+            city: "cidade"
+        } as Address);
 
         customer.addRewardPoints(10);
         customer.activate();
@@ -71,7 +79,12 @@ describe("Customer Repository unit tests", () => {
         });
 
         customer.changeName("Samuel");
-        customer.changeAdress("new street", 5, "11111-111", "new cidade");
+        customer.changeAdress({
+            street: "new street",
+            number: 5,
+            zip: "11111-111",
+            city: "new cidade"
+        } as Address);
 
         await new CustomerRepository().update(customer);
         const customerModelUpdated = await CustomerModel.findOne({ where: { id: "1" } });
@@ -90,7 +103,12 @@ describe("Customer Repository unit tests", () => {
 
     it("Should find a product", async () => {
         const customer = new Customer("1", "Isac");
-        customer.changeAdress("street", 2, "99999-999", "cidade");
+        customer.changeAdress({
+            street: "street",
+            number: 2,
+            zip: "99999-999",
+            city: "cidade"
+        } as Address);
 
         customer.addRewardPoints(10);
         customer.activate();
@@ -103,12 +121,22 @@ describe("Customer Repository unit tests", () => {
 
     it("Should be returned all customers", async () => {
         const customerOne = new Customer("1", "Isac");
-        customerOne.changeAdress("street", 2, "99999-999", "cidade");
+        customerOne.changeAdress({
+            street: "street",
+            number: 2,
+            zip: "99999-999",
+            city: "cidade"
+        } as Address);
         customerOne.addRewardPoints(10);
         customerOne.activate();
 
         const customerTwo = new Customer("2", "Isac");
-        customerTwo.changeAdress("street", 2, "99999-999", "cidade");
+        customerTwo.changeAdress({
+            street: "street",
+            number: 2,
+            zip: "99999-999",
+            city: "cidade"
+        } as Address);
         customerTwo.addRewardPoints(10);
         customerTwo.activate();
 
