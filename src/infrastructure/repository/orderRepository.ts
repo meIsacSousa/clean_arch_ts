@@ -5,16 +5,15 @@ import OrderModel from "../db/sequelize/model/order.model";
 import OrderItemModel from "../db/sequelize/model/orderItem.model";
 
 export default class OrderRepository implements IOrderRepository {
+
+    // TODO: colocar o update para orderItem
     async update(entity: Order): Promise<void> {
-        const orderModel = await OrderModel.findOne({ where: { id: entity.id }, include: [{ model: OrderItemModel }] });
-        if (orderModel) {
-            orderModel.update({
-                id: entity.id,
-                customerId: entity.customerId,
-                total: entity.total(),
-                items: this.orderItemToModelMapper(entity.items)
-            });
-        }
+        await OrderModel.update({
+            id: entity.id,
+            customerId: entity.customerId,
+            total: entity.total(),
+        }, { where: { id: entity.id } });
+
     }
 
     async find(id: string): Promise<Order> {
@@ -46,14 +45,20 @@ export default class OrderRepository implements IOrderRepository {
         }, { include: [{ model: OrderItemModel }] });
     }
 
-
     private orderItemToModelMapper(items: OrderItem[]): OrderItemModel[] {
-        return items.map(i => ({
-            id: i.id,
-            name: i.name,
-            price: i.price,
-            productId: i.productId,
-            quantity: i.quantity,
-        } as OrderItemModel))
+
+        return items.map(i => {
+            return OrderItemModel.build({
+                id: i.id,
+                name: i.name,
+                price: i.price / i.quantity,
+                productId: i.productId,
+                quantity: i.quantity
+            });
+        })
+    }
+
+    private orderItemModelToEntityMapper(item: OrderItemModel): OrderItem {
+        return new OrderItem(item.id, item.name, item.price, item.productId, item.quantity);
     }
 }

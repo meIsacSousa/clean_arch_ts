@@ -4,6 +4,7 @@
     "@swc/core": "^1.2.170",
     "@swc/jest": "^0.2.20",
     "@types/jest": "^27.4.1",
+    "@types/sequelize": "^4.28.13",
     "jest": "^27.5.1",
     "ts-node": "^10.7.0",
     "tslint": "^6.1.3",
