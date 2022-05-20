@@ -4,6 +4,6 @@ import ProductCreatedEvent from "../product-created.event";
 
 export default class SendEmalWhenProductIsCreatedHandler implements IEventHandler<ProductCreatedEvent> {
     handle(event: ProductCreatedEvent): void {
-        console.log(`Sending email to ${event.eventData.email}`);
+        console.log(`Sending email ...`);
     }
 }
