@@ -1,6 +1,7 @@
 import IProduct from "./IProduct";
 
-export default class Product implements IProduct {
+// Simulação para uso de factory
+export default class ProductB implements IProduct {
     private _id: string;
     private _name: string;
     private _price: number;
@@ -17,11 +18,11 @@ export default class Product implements IProduct {
     }
 
     get name(): string {
-        return this._name;
+        return this._name + " B";
     }
 
     get price(): number {
-        return this._price;
+        return this._price * 2;
     }
 
     changeName(name: string): void {
