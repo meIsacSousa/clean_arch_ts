@@ -1,10 +1,10 @@
 import IProductRepository from "../../../domain/product/repository/IProductRepository";
-import { InputFindProductDto, OutputfindProductDto } from "./find.product.dto";
+import { InputFindProductDto, OutputFindProductDto } from "./find.product.dto";
 
 export default class FindProductUseCase {
     constructor(private productRepository: IProductRepository) { }
 
-    async execute(input: InputFindProductDto): Promise<OutputfindProductDto> {
+    async execute(input: InputFindProductDto): Promise<OutputFindProductDto> {
         const product = await this.productRepository.find(input.id);
 
         if (!product) {
