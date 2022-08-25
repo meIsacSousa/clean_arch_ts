@@ -34,7 +34,7 @@ export default class CustomerRepository implements ICustomerRepository {
 
         if (customerModel) {
             const customer = new Customer(customerModel.id, customerModel.name);
-            customer.changeAdress({
+            customer.changeAddress({
                 street: customerModel.street,
                 number: customerModel.number,
                 zip: customerModel.zipcode,
@@ -56,7 +56,7 @@ export default class CustomerRepository implements ICustomerRepository {
         const customerModels = await CustomerModel.findAll();
         return customerModels.map(c => {
             const customer = new Customer(c.id, c.name);
-            customer.changeAdress({
+            customer.changeAddress({
                 street: c.street,
                 number: c.number,
                 zip: c.zipcode,

@@ -11,7 +11,7 @@ export default class CustomerFactory {
 
     public static createWithAddress(name: string, address: Address): Customer {
         const customer = new Customer(randomUUID(), name);
-        customer.changeAdress(address);
+        customer.changeAddress(address);
 
         return customer;
     }

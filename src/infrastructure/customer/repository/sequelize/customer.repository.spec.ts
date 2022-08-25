@@ -28,7 +28,7 @@ describe("Customer Repository unit tests", () => {
 
     it("Should create a customer", async () => {
         const customer = new Customer("1", "Isac");
-        customer.changeAdress({
+        customer.changeAddress({
             street: "street",
             number: 2,
             zip: "99999-999",
@@ -55,7 +55,7 @@ describe("Customer Repository unit tests", () => {
 
     it("Should update a costumer", async () => {
         const customer = new Customer("1", "Isac");
-        customer.changeAdress({
+        customer.changeAddress({
             street: "street",
             number: 2,
             zip: "99999-999",
@@ -79,7 +79,7 @@ describe("Customer Repository unit tests", () => {
         });
 
         customer.changeName("Samuel");
-        customer.changeAdress({
+        customer.changeAddress({
             street: "new street",
             number: 5,
             zip: "11111-111",
@@ -103,7 +103,7 @@ describe("Customer Repository unit tests", () => {
 
     it("Should find a product", async () => {
         const customer = new Customer("1", "Isac");
-        customer.changeAdress({
+        customer.changeAddress({
             street: "street",
             number: 2,
             zip: "99999-999",
@@ -121,7 +121,7 @@ describe("Customer Repository unit tests", () => {
 
     it("Should be returned all customers", async () => {
         const customerOne = new Customer("1", "Isac");
-        customerOne.changeAdress({
+        customerOne.changeAddress({
             street: "street",
             number: 2,
             zip: "99999-999",
@@ -131,7 +131,7 @@ describe("Customer Repository unit tests", () => {
         customerOne.activate();
 
         const customerTwo = new Customer("2", "Isac");
-        customerTwo.changeAdress({
+        customerTwo.changeAddress({
             street: "street",
             number: 2,
             zip: "99999-999",

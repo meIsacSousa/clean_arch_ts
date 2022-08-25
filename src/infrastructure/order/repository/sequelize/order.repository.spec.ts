@@ -1,4 +1,4 @@
-import { Model, Sequelize } from "sequelize-typescript";
+import { Sequelize } from "sequelize-typescript";
 import Order from "../../../../domain/checkout/entity/order";
 import OrderItem from "../../../../domain/checkout/entity/order_item";
 import Customer from "../../../../domain/customer/entity/customer";
@@ -38,7 +38,7 @@ describe("Order repository test", () => {
         // Definindo uma ordem
         const customer = new Customer("c1", "Isac");
         const address = new Address("Rua 1", 1, "99999-999", "Cidade");
-        customer.changeAdress(address);
+        customer.changeAddress(address);
         await new CustomerRepository().create(customer);
 
         const product = new Product("p1", "Product 1", 10);
@@ -62,7 +62,7 @@ describe("Order repository test", () => {
         // Definindo uma segunda ordem
         const customer2 = new Customer("c2", "Isac");
         const address2 = new Address("Rua 2", 2, "88888-888", "Cidade 2");
-        customer2.changeAdress(address2);
+        customer2.changeAddress(address2);
         await new CustomerRepository().create(customer2);
 
         const product2 = new Product("p2", "Product 2", 20);
@@ -92,7 +92,7 @@ describe("Order repository test", () => {
     it("Should find an order ", async () => {
         const customer = new Customer("c1", "Isac");
         const address = new Address("Rua 1", 1, "99999-999", "Cidade");
-        customer.changeAdress(address);
+        customer.changeAddress(address);
         await new CustomerRepository().create(customer);
 
         const product = new Product("p1", "Product 1", 10);
@@ -123,7 +123,7 @@ describe("Order repository test", () => {
         const customer = new Customer("c1", "Isac");
 
         const address = new Address("Rua 1", 1, "99999-999", "Cidade");
-        customer.changeAdress(address);
+        customer.changeAddress(address);
         await new CustomerRepository().create(customer);
 
         const product = new Product("p1", "Product 1", 10);
@@ -157,7 +157,7 @@ describe("Order repository test", () => {
         const customerRepository = new CustomerRepository();
         const customer = new Customer("c1", "Isac");
         const address = new Address("Rua 1", 1, "99999-999", "Cidade");
-        customer.changeAdress(address);
+        customer.changeAddress(address);
 
         await customerRepository.create(customer);
 
@@ -182,7 +182,7 @@ describe("Order repository test", () => {
 
         const newCustomer = new Customer("c2", "Samuel");
         const newAddress = new Address("Rua 2", 2, "55555-555", "Cidade");
-        newCustomer.changeAdress(newAddress);
+        newCustomer.changeAddress(newAddress);
         await customerRepository.create(newCustomer);
 
         order.changeCustomer(newCustomer.id);

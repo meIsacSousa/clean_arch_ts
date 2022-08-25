@@ -49,7 +49,7 @@ export default class Customer {
         this.validate();
     }
 
-    changeAdress({ street, number, zip, city }: Address) {
+    changeAddress({ street, number, zip, city }: Address) {
         this.address = new Address(street, number, zip, city);
         this.validate();
     }
