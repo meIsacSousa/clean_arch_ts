@@ -27,8 +27,8 @@ describe("Unit test - find a customer", () => {
             name: "John Doe",
             address: {
                 street: "Street",
-                city: "City",
                 number: 1,
+                city: "City",
                 zip: "12345"
             }
         }

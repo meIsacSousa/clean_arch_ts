@@ -42,8 +42,8 @@ describe("Integration test - find customer use case", () => {
             name: "John Doe",
             address: {
                 street: "Street",
-                city: "City",
                 number: 1,
+                city: "City",
                 zip: "12345"
             }
         }
