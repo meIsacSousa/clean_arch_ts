@@ -44,11 +44,8 @@ describe("Unit test - find a customer", () => {
 
         const input = { id: "2" };
 
-        customerRepository.find.mockImplementation(() => {
-            throw new Error("Customer not found");
-        });
+        customerRepository.find.mockReturnValue(Promise.resolve(null));
 
-        // customerRepository.find.mockReturnValue(Promise.reject(new Error("Customer not found")));
 
         expect(() => usecase.execute(input)).rejects.toThrow("Customer not found");
     });

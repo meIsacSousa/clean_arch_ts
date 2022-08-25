@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+import Product from "../../../domain/product/entity/product";
 import ProductFactory from "../../../domain/product/factory/product.factory";
 import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
 import ProductRepository from "../../../infrastructure/product/repository/sequelize/productRepository";
@@ -33,8 +34,8 @@ describe("Integration test - list product use case", () => {
         const product1 = ProductFactory.create("Product One", 1, 'a');
         const product2 = ProductFactory.create("Product Two", 2, 'a');
 
-        await productRepository.create(product1);
-        await productRepository.create(product2);
+        await productRepository.create(product1 as Product);
+        await productRepository.create(product2 as Product);
 
         // ACT
         const result = await usecase.execute({});

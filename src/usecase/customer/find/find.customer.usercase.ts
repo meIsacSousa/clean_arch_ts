@@ -11,6 +11,10 @@ export default class FindCustomerUseCase {
     async execute(input: InputFindCustomerDto): Promise<OutputFindCustomerDto> {
         const customer = await this.customerRepository.find(input.id);
 
+        if (!customer) {
+            throw new Error("Customer not found");
+        }
+
         return {
             id: customer.id,
             name: customer.name,

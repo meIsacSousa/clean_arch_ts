@@ -55,5 +55,13 @@ describe("Integration test - find customer use case", () => {
         expect(result).toEqual(output);
     });
 
+    it("Should throw an error when customer not found", async () => {
+        // ARRANGE
+        const customerRepository = new CustomerRepository();
+        const usecase = new FindCustomerUseCase(customerRepository)
 
+        const input = { id: "2" };
+        // ACT & ASSERT
+        await expect(() => usecase.execute(input)).rejects.toThrow("Customer not found");
+    });
 });
