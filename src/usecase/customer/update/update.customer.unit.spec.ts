@@ -35,4 +35,24 @@ describe("Unit test - Customer update use case", () => {
         const output = await useCase.execute(input);
         expect(output).toEqual(input);
     });
+
+    it("Should throw an error when customer not found", async () => {
+        const repository = mockRepository();
+        const useCase = new UpdateCustomerUseCase(repository);
+
+        const input = {
+            id: "1",
+            name: "John updated",
+            address: {
+                street: "Street updated",
+                number: 2,
+                city: "City updated",
+                zip: "Zip updated",
+            }
+        }
+
+        repository.find.mockReturnValue(Promise.resolve(null));
+        expect(() => useCase.execute(input)).rejects.toThrowError("Customer not found");
+    });
+
 });
