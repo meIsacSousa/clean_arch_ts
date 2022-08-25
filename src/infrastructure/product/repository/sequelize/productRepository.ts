@@ -1,9 +1,10 @@
+import IProduct from "../../../../domain/product/entity/IProduct";
 import Product from "../../../../domain/product/entity/product";
 import IProductRepository from "../../../../domain/product/repository/IProductRepository";
 import ProductModel from "./product.model";
 
 export default class ProductRepository implements IProductRepository {
-    async create(entity: Product): Promise<void> {
+    async create(entity: IProduct): Promise<void> {
         await ProductModel.create({
             id: entity.id,
             name: entity.name,
@@ -11,7 +12,7 @@ export default class ProductRepository implements IProductRepository {
         });
     }
 
-    async update(entity: Product): Promise<void> {
+    async update(entity: IProduct): Promise<void> {
         await ProductModel.update({
             name: entity.name,
             price: entity.price,
