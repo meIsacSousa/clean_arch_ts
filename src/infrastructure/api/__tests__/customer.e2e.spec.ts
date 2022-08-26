@@ -89,5 +89,34 @@ describe("Test E2E - Customer", () => {
         expect(response.body.customers[1].address).toHaveProperty("number", 2);
         expect(response.body.customers[1].address).toHaveProperty("city", "São Paulo");
         expect(response.body.customers[1].address).toHaveProperty("zip", "01234-567");
+
+
+        const listResponseXML = await request(app)
+            .get("/customers").set("accept", "application/xml").send();
+
+        expect(listResponseXML.status).toBe(200);
+        expect(listResponseXML.text).toContain("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        expect(listResponseXML.text).toContain("<customers>");
+        expect(listResponseXML.text).toContain("<customer>");
+        expect(listResponseXML.text).toContain("<id>");
+        expect(listResponseXML.text).toContain("<name>John One</name>");
+        expect(listResponseXML.text).toContain("<address>");
+        expect(listResponseXML.text).toContain("<street>Rua Um</street>");
+        expect(listResponseXML.text).toContain("<number>1</number>");
+        expect(listResponseXML.text).toContain("<city>São Paulo</city>");
+        expect(listResponseXML.text).toContain("<zip>01234-567</zip>");
+        expect(listResponseXML.text).toContain("</address>");
+        expect(listResponseXML.text).toContain("</customer>");
+        expect(listResponseXML.text).toContain("<customer>");
+        expect(listResponseXML.text).toContain("<id>");
+        expect(listResponseXML.text).toContain("<name>John Two</name>");
+        expect(listResponseXML.text).toContain("<address>");
+        expect(listResponseXML.text).toContain("<street>Rua dois</street>");
+        expect(listResponseXML.text).toContain("<number>2</number>");
+        expect(listResponseXML.text).toContain("<city>São Paulo</city>");
+        expect(listResponseXML.text).toContain("<zip>01234-567</zip>");
+        expect(listResponseXML.text).toContain("</address>");
+        expect(listResponseXML.text).toContain("</customer>");
+        expect(listResponseXML.text).toContain("</customers>");
     });
 });
