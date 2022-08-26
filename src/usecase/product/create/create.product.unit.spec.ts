@@ -1,4 +1,3 @@
-import ProductFactory from "../../../domain/product/factory/product.factory";
 import CreateProductUseCase from "./create.product.usecase";
 
 const mockRepository = () => {

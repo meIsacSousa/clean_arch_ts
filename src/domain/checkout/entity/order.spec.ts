@@ -5,20 +5,20 @@ describe("Order unit tests", () => {
     it("Should throw an error when id is empty", () => {
         expect(() => {
             const orderItem = new OrderItem("1", "name", 1, "p1", 2);
-            const order = new Order("", "1", [orderItem]);
+            const _order = new Order("", "1", [orderItem]);
         }).toThrowError("Id is required");
     });
 
     it("Should throw an error when customerId is empty", () => {
         expect(() => {
             const orderItem = new OrderItem("1", "name", 1, "p1", 2);
-            const order = new Order("1", "", [orderItem]);
+            const _order = new Order("1", "", [orderItem]);
         }).toThrowError("CustomerId is required");
     });
 
     it("Should throw an error when items is empty", () => {
         expect(() => {
-            const order = new Order("1", "1", []);
+            const _order = new Order("1", "1", []);
         }).toThrowError("Items need to have at least 1 item");
     });
 
@@ -34,7 +34,7 @@ describe("Order unit tests", () => {
 
     it("Must thrpw an error if items quantity is less than 1", () => {
         expect(() => {
-            const item = new OrderItem("1", "name", 10, "2", 0);
+            const _item = new OrderItem("1", "name", 10, "2", 0);
         }).toThrowError("Quantity must be greater than 0")
     });
 });
