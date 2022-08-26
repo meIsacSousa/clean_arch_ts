@@ -1,18 +1,19 @@
 // ENTITY -> REGRAS DE NEGÓCIO (Complexidade de negócio);
 // ENTITY / MODEL -> Atender a infraestrutura (ORM) (Complexidade acidental);
 
+import Entity from "../../@shared/entity/entity.abstract";
+import NotificationError from "../../@shared/notification/notification.error";
 import Address from "../value-object/address";
 
 
-export default class Customer {
-    private _id: string;
+export default class Customer extends Entity {
     private _name: string;
     private _address!: Address;
     private _active: boolean = false;
     private _rewardPoints: number = 0;
 
     constructor(id: string, name: string) {
-        this._id = id;
+        super(id);
         this._name = name;
 
         this.validate();
@@ -26,11 +27,6 @@ export default class Customer {
         return this._address;
     }
 
-
-    get id(): string {
-        return this._id;
-    }
-
     get name(): string {
         return this._name;
     }
@@ -40,8 +36,18 @@ export default class Customer {
     }
 
     validate() {
-        if (this._id.length === 0) throw new Error("Id is required");
-        if (this._name.length === 0) throw new Error("Name is required");
+        if (this._id.length === 0) this.notification.addError({
+            message: "Id is required",
+            context: "customer"
+        });
+
+        if (this._name.length === 0) this.notification.addError({
+            message: "Name is required",
+            context: "customer"
+        });
+
+        if (this.notification.hasErrors())
+            throw new NotificationError(this.notification.errors);
     }
 
     changeName(name: string): void {

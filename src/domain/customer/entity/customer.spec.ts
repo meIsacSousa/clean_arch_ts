@@ -6,13 +6,19 @@ describe("Customer unit tests", () => {
     it("Should throw an error when id is empty", () => {
         expect(() => {
             let _customer = new Customer("", "Isac");
-        }).toThrowError("Id is required");
+        }).toThrowError("customer: Id is required");
     });
 
     it("Should throw an error when name is empty", () => {
         expect(() => {
             let _customer = new Customer("1", "");
-        }).toThrowError("Name is required");
+        }).toThrowError("customer: Name is required");
+    });
+
+    it("Should throw an error when id and name are empty", () => {
+        expect(() => {
+            let _customer = new Customer("", "");
+        }).toThrowError("customer: Id is required, customer: Name is required");
     });
 
     it("Should change name", () => {
@@ -35,8 +41,8 @@ describe("Customer unit tests", () => {
 
         //act
         customer.activate();
-        
-        
+
+
         // assert
         expect(customer.isActive()).toBe(true);
     });
@@ -51,8 +57,8 @@ describe("Customer unit tests", () => {
         //act
         customer.activate();
         customer.deactivate();
-        
-        
+
+
         // assert
         expect(customer.isActive()).toBe(false);
     });
@@ -60,8 +66,8 @@ describe("Customer unit tests", () => {
 
     it("Should throw an error when address is not defined during a customer activate", () => {
         // Arrange
-        const customer = new Customer("1", "Isac");        
-        
+        const customer = new Customer("1", "Isac");
+
         // act & assert
         expect(() => {
             customer.activate();
@@ -71,7 +77,7 @@ describe("Customer unit tests", () => {
     it("Should add reward points", () => {
         const customer = new Customer("1", "Isac");
         expect(customer.rewardPoints).toBe(0);
-        
+
         customer.addRewardPoints(10);
         expect(customer.rewardPoints).toBe(10);
     });

@@ -38,4 +38,28 @@ describe("Unit Test - Notification", () => {
         expect(notification.messages())
             .toBe("customer: error message, customer: error message2, order: error message3");
     });
+
+    it("Should verificate if notification has errors", () => {
+        const notification = new Notification();
+
+        expect(notification.hasErrors()).toBe(false);
+        notification.addError({
+            message: "error message",
+            context: "customer",
+        });
+
+        expect(notification.hasErrors()).toBe(true);
+    });
+
+    it("Should get errors", () => {
+        const notification = new Notification();
+        const error = {
+            message: "error message",
+            context: "customer",
+        }
+
+        notification.addError(error);
+
+        expect(notification.errors).toEqual([error]);
+    });
 });
