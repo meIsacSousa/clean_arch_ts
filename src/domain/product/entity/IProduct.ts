@@ -1,5 +1,6 @@
-export default interface IProduct {
-    get id(): string;
+import Entity from "../../@shared/entity/entity.abstract";
+
+export default interface IProduct extends Entity {
     get name(): string;
     get price(): number;
     changePrice(price: number): void;
