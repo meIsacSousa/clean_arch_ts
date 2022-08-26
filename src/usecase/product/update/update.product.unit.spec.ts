@@ -20,14 +20,14 @@ describe("Unit Test - Update Product use case", () => {
 
         const input = {
             id: product.id,
-            name: product.name,
-            price: product.price,
+            name: "Name Updated",
+            price: 388,
         }
 
         const output = {
             id: product.id,
-            name: product.name,
-            price: product.price,
+            name: input.name,
+            price: input.price,
         }
 
         const result = await usecase.execute(input);
