@@ -39,7 +39,7 @@ describe("Unit test - Create Product", () => {
             price: 100
         }
 
-        expect(() => usecase.execute(input)).rejects.toThrowError("Name is required");
+        expect(() => usecase.execute(input)).rejects.toThrowError("product: Name is required");
     });
 
     it("Should throw an error when price < 0", async () => {
@@ -51,6 +51,6 @@ describe("Unit test - Create Product", () => {
             price: -1
         }
 
-        expect(() => usecase.execute(input)).rejects.toThrowError("Price should be greater than 0");
+        expect(() => usecase.execute(input)).rejects.toThrowError("product: Price must be greater than 0");
     });
 });    

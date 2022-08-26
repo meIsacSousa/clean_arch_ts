@@ -50,6 +50,6 @@ describe("Integration Test - Create Product", () => {
             price: 100
         }
 
-        await expect(() => usecase.execute(input)).rejects.toThrowError("Name is required");
+        await expect(() => usecase.execute(input)).rejects.toThrowError("product: Name is required");
     });
 });
