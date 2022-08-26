@@ -17,7 +17,7 @@ describe("Test E2E - Customer", () => {
                 name: "John Doe",
                 address: {
                     street: "Rua dois",
-                    number: "123",
+                    number: 123,
                     city: "São Paulo",
                     zip: "01234-567",
                 }
@@ -28,12 +28,12 @@ describe("Test E2E - Customer", () => {
         expect(response.body).toHaveProperty("name", "John Doe");
         expect(response.body).toHaveProperty("address");
         expect(response.body.address).toHaveProperty("street", "Rua dois");
-        expect(response.body.address).toHaveProperty("number", "123");
+        expect(response.body.address).toHaveProperty("number", 123);
         expect(response.body.address).toHaveProperty("city", "São Paulo");
         expect(response.body.address).toHaveProperty("zip", "01234-567");
     });
 
-    it("Should not create a costumer and return an error", async () => {
+    it("Should not create a costumer", async () => {
         const response = await request(app)
             .post("/customers")
             .send({
@@ -50,7 +50,7 @@ describe("Test E2E - Customer", () => {
                 name: "John One",
                 address: {
                     street: "Rua Um",
-                    number: "1",
+                    number: 1,
                     city: "São Paulo",
                     zip: "01234-567",
                 }
@@ -62,7 +62,7 @@ describe("Test E2E - Customer", () => {
                 name: "John Two",
                 address: {
                     street: "Rua dois",
-                    number: "2",
+                    number: 2,
                     city: "São Paulo",
                     zip: "01234-567",
                 }

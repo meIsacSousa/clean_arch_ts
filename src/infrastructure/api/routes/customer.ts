@@ -9,7 +9,7 @@ customerRoute.post("/", async (req: Request, res: Response) => {
     const usecase = new CreateCustomerUseCase(new CustomerRepository());
     try {
 
-        const customerDto = {
+        const input = {
             name: req.body.name,
             address: {
                 street: req.body.address.street,
@@ -19,15 +19,15 @@ customerRoute.post("/", async (req: Request, res: Response) => {
             }
         }
 
-        const customer = await usecase.execute(customerDto);
+        const customer = await usecase.execute(input);
         res.status(201).send(customer);
 
     } catch (error) {
-        res.status(500).send();
+        res.status(500).send(error);
     }
 });
 
-customerRoute.get("/", async (req: Request, res: Response) => {
+customerRoute.get("/", async (_req: Request, res: Response) => {
     const usecase = new ListCustomerUseCase(new CustomerRepository());
     try {
         const input = {};
